@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from .models import Board, List, Card
-
+from ..models import Board, List, Card
 
 class CardSerializer(serializers.ModelSerializer):
     assigned_to_username = serializers.ReadOnlyField(source='assigned_to.username')
