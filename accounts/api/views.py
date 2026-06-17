@@ -1,10 +1,10 @@
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth.models import User
 from .serializers import RegisterSerializer, UserSerializer
-from .permissions import IsAdminLevel
+from ..permissions import IsAdminLevel
 
 
 class RegisterView(generics.CreateAPIView):
