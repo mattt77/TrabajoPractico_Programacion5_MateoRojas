@@ -246,6 +246,18 @@ function searchCards(query) {
   return results.slice(0, 8);
 }
 
+async function goToSearchResult(boardId, cardId) {
+  document.getElementById('sidebar-search-results').classList.add('hidden');
+  document.getElementById('sidebar-search-input').value = '';
+
+  const board = allBoards.find(b => b.id === boardId);
+  navigate(`/api/board/${boardId}`);
+
+  if (board) {
+    setTimeout(() => openCardDetail(cardId), 300);
+  }
+}
+
 function renderSearchResults(results, query) {
   const container = document.getElementById('sidebar-search-results');
 
