@@ -11,6 +11,7 @@ let currentBoardId = null;
 let allBoards = [];
 let ws = null;
 let draggedCardId = null;
+let draggedListId = null;
 let pendingDelete = null;
 let boardWs = null;
 let currentBoardData = null;
