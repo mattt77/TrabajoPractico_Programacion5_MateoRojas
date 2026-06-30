@@ -24,6 +24,28 @@ function h() {
   return { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` };
 }
 
+async function refreshAccessToken() {
+  const refreshToken = sessionStorage.getItem('tf_refresh');
+  if (!refreshToken) return false;
+  try {
+    const res = await fetch(`${API}/token/refresh/`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ refresh: refreshToken })
+    });
+    if (!res.ok) return false;
+    const data = await res.json();
+    token = data.access;
+    sessionStorage.setItem('tf_token', token);
+    if (data.refresh) {
+      sessionStorage.setItem('tf_refresh', data.refresh);
+    }
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 async function api(method, path, body) {
   const opts = { method, headers: h() };
   if (body) opts.body = JSON.stringify(body);
@@ -31,7 +53,6 @@ async function api(method, path, body) {
   if (res.status === 401) { logout(); return null; }
   return res;
 }
-
 function setLoading(btnId, loading) {
   const btn = document.getElementById(btnId);
   if (!btn) return;
