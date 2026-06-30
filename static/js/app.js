@@ -183,7 +183,7 @@ async function showApp() {
   document.getElementById('username-display').textContent = currentUser;
   document.getElementById('user-avatar').textContent = currentUser[0].toUpperCase();
 
-  const res = await fetch(`${API}/users/me/`, { headers: h() });
+  const res = await api('GET', '/users/me/');
   if (res.ok) {
     const me = await res.json();
     userLevel = me.level;
