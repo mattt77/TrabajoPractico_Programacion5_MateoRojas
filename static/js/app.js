@@ -215,6 +215,23 @@ async function loadBoards() {
   if (currentBoardId === null) renderBoardsGrid();
 }
 
+function searchCards(query) {
+  const q = query.trim().toLowerCase();
+  if (!q) return [];
+
+  const results = [];
+  for (const board of allBoards) {
+    for (const list of board.lists || []) {
+      for (const card of list.cards || []) {
+        if (card.title.toLowerCase().includes(q)) {
+          results.push({ card, list, board });
+        }
+      }
+    }
+  }
+  return results.slice(0, 8);
+}
+
 function renderSidebar() {
   const list = document.getElementById('sidebar-boards');
   const home = document.getElementById('sidebar-home');
