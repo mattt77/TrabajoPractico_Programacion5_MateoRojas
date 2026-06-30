@@ -744,6 +744,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape') {
       const cardModal = document.getElementById('card-detail-modal');
       if (cardModal && !cardModal.classList.contains('hidden')) closeCardDetail();
+      const confirmModal = document.getElementById('confirm-modal');
+      if (confirmModal && !confirmModal.classList.contains('hidden')) closeModal();
     }
   });
   document.getElementById('modal-confirm-btn').addEventListener('click', async () => {
