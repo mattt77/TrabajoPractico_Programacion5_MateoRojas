@@ -537,7 +537,9 @@ async function createList() {
   const title = document.getElementById('list-input').value.trim();
   if (!title) return;
   const position = document.querySelectorAll('.list-col').length * 1000;
+  setLoading('create-list-btn', true);
   const res = await api('POST', '/lists/', { title, board: currentBoardId, position });
+  setLoading('create-list-btn', false);
   if (res && res.ok) { hideAddListForm(); refreshBoard(); }
   else toast('Error al crear la lista', 'error');
 }
