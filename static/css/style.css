@@ -375,6 +375,8 @@ header {
 .card-item:hover { border-color: var(--border-h); box-shadow: 0 3px 12px rgba(0,0,0,0.25); transform: translateY(-1px); }
 .card-item:active { cursor: grabbing; }
 .card-item.dragging { opacity: 0.35; transform: scale(0.97); border-style: dashed; }
+.list-col.list-dragging { opacity: 0.4; transform: scale(0.98); }
+.list-col.list-drag-over { outline: 2px dashed var(--blue); outline-offset: -4px; background: var(--blue-glow); }
 .card-title { font-size: 13px; font-weight: 500; line-height: 1.45; }
 .card-meta { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
 .card-assigned { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--muted); background: var(--panel); border-radius: 99px; padding: 2px 8px; }
