@@ -52,6 +52,7 @@ class Card(models.Model):
         blank=True,
         related_name='assigned_cards'
     )
+    due_date = models.DateField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
