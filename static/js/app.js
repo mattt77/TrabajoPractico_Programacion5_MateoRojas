@@ -763,6 +763,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (panel && !panel.classList.contains('hidden')) {
       if (!panel.contains(e.target)) panel.classList.add('hidden');
     }
+    const searchWrapper = document.querySelector('.sidebar-search-wrapper');
+    const searchResults = document.getElementById('sidebar-search-results');
+    if (searchWrapper && searchResults && !searchResults.classList.contains('hidden')) {
+      if (!searchWrapper.contains(e.target)) searchResults.classList.add('hidden');
+    }
   });
 
   // ── INIT con router ────────────────────────────────────────────────────────
