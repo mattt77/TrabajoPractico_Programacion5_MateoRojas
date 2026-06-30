@@ -405,6 +405,22 @@ function renderBoard(board) {
     </div>
   `;
 }
+function dueDateStatus(dueDate) {
+  if (!dueDate) return null;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const due = new Date(dueDate + 'T00:00:00');
+  const diffDays = Math.round((due - today) / 86400000);
+
+  if (diffDays < 0) return 'overdue';
+  if (diffDays <= 2) return 'soon';
+  return 'ok';
+}
+
+function formatDueDate(dueDate) {
+  const due = new Date(dueDate + 'T00:00:00');
+  return due.toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit' });
+}
 
 function cardHTML(card) {
   return `
