@@ -745,6 +745,10 @@ function closeModal() {
 
 document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', (e) => {
+    if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+      e.preventDefault();
+      document.getElementById('sidebar-search-input').focus();
+    }
     if (e.key === 'Escape') {
       const cardModal = document.getElementById('card-detail-modal');
       if (cardModal && !cardModal.classList.contains('hidden')) closeCardDetail();
