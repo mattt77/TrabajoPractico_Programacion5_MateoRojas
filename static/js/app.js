@@ -215,6 +215,20 @@ async function loadBoards() {
   if (currentBoardId === null) renderBoardsGrid();
 }
 
+function onSidebarSearchInput(event) {
+  const query = event.target.value;
+  const container = document.getElementById('sidebar-search-results');
+
+  if (!query.trim()) {
+    container.classList.add('hidden');
+    container.innerHTML = '';
+    return;
+  }
+
+  const results = searchCards(query);
+  renderSearchResults(results, query);
+}
+
 function searchCards(query) {
   const q = query.trim().toLowerCase();
   if (!q) return [];
