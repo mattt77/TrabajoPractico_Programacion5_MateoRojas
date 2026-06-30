@@ -522,10 +522,11 @@ async function openCardDetail(cardId) {
   if (!card) return;
   await ensureUsersLoaded();
 
-  document.getElementById('card-detail-id').value = card.id;
+document.getElementById('card-detail-id').value = card.id;
   document.getElementById('card-detail-title').value = card.title;
   document.getElementById('card-detail-desc').value = card.description || '';
-
+  document.getElementById('card-detail-due').value = card.due_date || '';
+  
   const select = document.getElementById('card-detail-assignee');
   select.innerHTML = '<option value="">Sin asignar</option>' +
     allUsersCache.map(u =>
