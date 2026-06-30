@@ -621,6 +621,7 @@ document.getElementById('card-detail-id').value = card.id;
     ).join('');
 
   document.getElementById('card-detail-modal').classList.remove('hidden');
+  setTimeout(() => document.getElementById('card-detail-title').focus(), 50);
 }
 
 function closeCardDetail() {
