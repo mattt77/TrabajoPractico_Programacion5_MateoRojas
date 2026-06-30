@@ -146,6 +146,13 @@
         <span class="sidebar-item-label">Inicio</span>
       </div>
 
+      <div class="sidebar-search-wrapper">
+        <input class="input" id="sidebar-search-input" type="text"
+          placeholder="Buscar tarjetas..."
+          oninput="onSidebarSearchInput(event)">
+        <div class="sidebar-search-results hidden" id="sidebar-search-results"></div>
+      </div>
+
       <div class="sidebar-section-title">Mis tableros</div>
       <div id="sidebar-boards"></div>
 
