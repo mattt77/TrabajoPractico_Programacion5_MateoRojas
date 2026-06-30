@@ -444,7 +444,7 @@ function renderBoard(board) {
           <textarea id="card-input-${list.id}" placeholder="Título de la tarjeta" rows="2"
             onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();createCard(${list.id})}"></textarea>
           <div class="add-card-actions">
-            <button class="btn btn-primary btn-sm" onclick="createCard(${list.id})">Agregar</button>
+            <button class="btn btn-primary btn-sm" id="create-card-btn-${list.id}" onclick="createCard(${list.id})">Agregar</button>
             <button class="cancel-btn" onclick="hideAddCardForm(${list.id})">✕</button>
           </div>
         </div>
