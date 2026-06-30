@@ -10,7 +10,7 @@ class CardSerializer(serializers.ModelSerializer):
             'id', 'title', 'description',
             'list', 'position',
             'assigned_to', 'assigned_to_username',
-            'created_at'
+            'due_date', 'created_at'
         ]
         read_only_fields = ['id', 'created_at', 'assigned_to_username']
 
