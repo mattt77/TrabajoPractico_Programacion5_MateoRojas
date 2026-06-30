@@ -120,11 +120,12 @@ async function login() {
     body: JSON.stringify({ username, password })
   });
   setLoading('login-btn', false);
-  if (res.ok) {
+if (res.ok) {
     const data = await res.json();
     token = data.access;
     currentUser = username;
     sessionStorage.setItem('tf_token', token);
+    sessionStorage.setItem('tf_refresh', data.refresh);
     sessionStorage.setItem('tf_user', currentUser);
     document.getElementById('login-err').innerHTML = '';
     await showApp();
