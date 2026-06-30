@@ -434,7 +434,9 @@ function renderBoard(board) {
         ondragover="onDragOver(event)"
         ondragleave="onDragLeave(event)"
         ondrop="onDrop(event, ${list.id})">
-        ${(list.cards || []).sort((a, b) => a.position - b.position).map(card => cardHTML(card)).join('')}
+        ${(list.cards || []).length === 0
+          ? '<div class="list-empty">Sin tarjetas</div>'
+          : (list.cards || []).sort((a, b) => a.position - b.position).map(card => cardHTML(card)).join('')}
       </div>
       <div class="col-footer">
         <button class="add-card-btn" onclick="showAddCardForm(${list.id})">
