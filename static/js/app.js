@@ -526,7 +526,7 @@ document.getElementById('card-detail-id').value = card.id;
   document.getElementById('card-detail-title').value = card.title;
   document.getElementById('card-detail-desc').value = card.description || '';
   document.getElementById('card-detail-due').value = card.due_date || '';
-  
+
   const select = document.getElementById('card-detail-assignee');
   select.innerHTML = '<option value="">Sin asignar</option>' +
     allUsersCache.map(u =>
@@ -545,6 +545,7 @@ async function saveCardDetail() {
   const title = document.getElementById('card-detail-title').value.trim();
   const description = document.getElementById('card-detail-desc').value.trim();
   const assigneeValue = document.getElementById('card-detail-assignee').value;
+  const dueValue = document.getElementById('card-detail-due').value;
 
   if (!title) { toast('El título no puede estar vacío', 'error'); return; }
 
@@ -552,7 +553,8 @@ async function saveCardDetail() {
   const res = await api('PATCH', `/cards/${id}/`, {
     title,
     description,
-    assigned_to: assigneeValue ? parseInt(assigneeValue) : null
+    assigned_to: assigneeValue ? parseInt(assigneeValue) : null,
+    due_date: dueValue || null
   });
   setLoading('card-detail-save-btn', false);
 
