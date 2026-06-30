@@ -571,7 +571,9 @@ async function createCard(listId) {
   const title = input.value.trim();
   if (!title) return;
   const position = document.querySelectorAll(`#cards-${listId} .card-item`).length * 1000;
+  setLoading(`create-card-btn-${listId}`, true);
   const res = await api('POST', '/cards/', { title, list: listId, position });
+  setLoading(`create-card-btn-${listId}`, false);
   if (res && res.ok) {
     input.value = '';
     hideAddCardForm(listId);
