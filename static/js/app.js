@@ -423,6 +423,7 @@ function formatDueDate(dueDate) {
 }
 
 function cardHTML(card) {
+  const dueStatus = dueDateStatus(card.due_date);
   return `
     <div class="card-item"
       draggable="true"
@@ -433,12 +434,18 @@ function cardHTML(card) {
       <button class="card-del"
         onclick="event.stopPropagation(); confirmDelete('card', ${card.id}, '${escapeQuotes(card.title)}')">✕</button>
       <div class="card-title">${card.title}</div>
-      ${card.assigned_to ? `
+      ${(card.assigned_to || dueStatus) ? `
         <div class="card-meta">
-          <div class="card-assigned">
-            <span style="font-size:10px">👤</span>
-            ${card.assigned_to_username || 'Asignado'}
-          </div>
+          ${dueStatus ? `
+            <div class="card-due card-due-${dueStatus}">
+              <span style="font-size:10px">📅</span>
+              ${formatDueDate(card.due_date)}
+            </div>` : '<span></span>'}
+          ${card.assigned_to ? `
+            <div class="card-assigned">
+              <span style="font-size:10px">👤</span>
+              ${card.assigned_to_username || 'Asignado'}
+            </div>` : ''}
         </div>` : ''}
     </div>
   `;
