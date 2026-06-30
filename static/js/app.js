@@ -566,6 +566,46 @@ async function saveCardDetail() {
 
 // ── DRAG & DROP ───────────────────────────────────────────────────────────────
 
+function onListDragStart(event, listId) {
+  draggedListId = listId;
+  event.currentTarget.classList.add('list-dragging');
+  event.dataTransfer.effectAllowed = 'move';
+  event.stopPropagation();
+}
+
+function onListDragEnd(event) {
+  event.currentTarget.classList.remove('list-dragging');
+}
+
+function onListDragOver(event) {
+  if (!draggedListId) return;
+  event.preventDefault();
+  event.currentTarget.classList.add('list-drag-over');
+}
+
+function onListDragLeave(event) {
+  event.currentTarget.classList.remove('list-drag-over');
+}
+
+async function onListDrop(event, targetListId) {
+  event.preventDefault();
+  event.stopPropagation();
+  event.currentTarget.classList.remove('list-drag-over');
+  if (!draggedListId || draggedListId === targetListId) { draggedListId = null; return; }
+
+  const cols = Array.from(document.querySelectorAll('.list-col'));
+  const draggedIndex = cols.findIndex(c => c.id === `list-col-${draggedListId}`);
+  const targetIndex = cols.findIndex(c => c.id === `list-col-${targetListId}`);
+  if (draggedIndex === -1 || targetIndex === -1) { draggedListId = null; return; }
+
+  const newPosition = (targetIndex + (draggedIndex < targetIndex ? 1 : 0)) * 1000 + 500;
+
+  const res = await api('PATCH', `/lists/${draggedListId}/`, { position: newPosition });
+  draggedListId = null;
+  if (res && res.ok) refreshBoard();
+  else toast('Error al mover la lista', 'error');
+}
+
 function onDragStart(event, cardId) {
   draggedCardId = cardId;
   event.target.classList.add('dragging');
@@ -598,7 +638,6 @@ async function onDrop(event, targetListId) {
   if (res && res.ok) refreshBoard();
   else toast('Error al mover la tarjeta', 'error');
 }
-
 // ── CONFIRM DELETE MODAL ──────────────────────────────────────────────────────
 
 function confirmDelete(type, id, name) {
