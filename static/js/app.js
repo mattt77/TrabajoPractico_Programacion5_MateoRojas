@@ -459,8 +459,7 @@ function renderBoard(board) {
         <input type="text" id="list-input" placeholder="Nombre de la lista"
           onkeydown="if(event.key==='Enter') createList()">
         <div class="form-row">
-          <button class="btn btn-primary btn-sm" onclick="createList()">Crear lista</button>
-          <button class="cancel-btn" onclick="hideAddListForm()">✕</button>
+        <button class="btn btn-primary btn-sm" id="create-list-btn" onclick="createList()">Crear lista</button>          <button class="cancel-btn" onclick="hideAddListForm()">✕</button>
         </div>
       </div>
     </div>
