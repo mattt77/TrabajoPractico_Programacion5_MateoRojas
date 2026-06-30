@@ -353,7 +353,13 @@ function renderBoard(board) {
   const lists = (board.lists || []).sort((a, b) => a.position - b.position);
 
   container.innerHTML = lists.map(list => `
-    <div class="list-col" id="list-col-${list.id}">
+    <div class="list-col" id="list-col-${list.id}"
+      draggable="true"
+      ondragstart="onListDragStart(event, ${list.id})"
+      ondragend="onListDragEnd(event)"
+      ondragover="onListDragOver(event)"
+      ondragleave="onListDragLeave(event)"
+      ondrop="onListDrop(event, ${list.id})">
       <div class="col-header">
         <span class="col-title">${list.title}</span>
         <div style="display:flex;align-items:center;gap:6px">
