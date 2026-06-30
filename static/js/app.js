@@ -49,8 +49,16 @@ async function refreshAccessToken() {
 async function api(method, path, body) {
   const opts = { method, headers: h() };
   if (body) opts.body = JSON.stringify(body);
-  const res = await fetch(`${API}${path}`, opts);
-  if (res.status === 401) { logout(); return null; }
+  let res = await fetch(`${API}${path}`, opts);
+
+  if (res.status === 401) {
+    const refreshed = await refreshAccessToken();
+    if (!refreshed) { logout(); return null; }
+    opts.headers = h();
+    res = await fetch(`${API}${path}`, opts);
+    if (res.status === 401) { logout(); return null; }
+  }
+
   return res;
 }
 function setLoading(btnId, loading) {
