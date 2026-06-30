@@ -746,6 +746,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (cardModal && !cardModal.classList.contains('hidden')) closeCardDetail();
       const confirmModal = document.getElementById('confirm-modal');
       if (confirmModal && !confirmModal.classList.contains('hidden')) closeModal();
+      const searchResults = document.getElementById('sidebar-search-results');
+      if (searchResults && !searchResults.classList.contains('hidden')) {
+        searchResults.classList.add('hidden');
+        document.getElementById('sidebar-search-input').blur();
+      }
     }
   });
   document.getElementById('modal-confirm-btn').addEventListener('click', async () => {
