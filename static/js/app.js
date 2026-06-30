@@ -232,6 +232,24 @@ function searchCards(query) {
   return results.slice(0, 8);
 }
 
+function renderSearchResults(results, query) {
+  const container = document.getElementById('sidebar-search-results');
+
+  if (results.length === 0) {
+    container.innerHTML = `<div class="search-no-results">Sin resultados para "${escapeQuotes(query)}"</div>`;
+    container.classList.remove('hidden');
+    return;
+  }
+
+  container.innerHTML = results.map(r => `
+    <div class="search-result-item" onclick="goToSearchResult(${r.board.id}, ${r.card.id})">
+      <div class="search-result-title">${r.card.title}</div>
+      <div class="search-result-meta">${r.board.title} · ${r.list.title}</div>
+    </div>
+  `).join('');
+  container.classList.remove('hidden');
+}
+
 function renderSidebar() {
   const list = document.getElementById('sidebar-boards');
   const home = document.getElementById('sidebar-home');
