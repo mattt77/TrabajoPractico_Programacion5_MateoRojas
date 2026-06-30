@@ -740,6 +740,12 @@ function closeModal() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const cardModal = document.getElementById('card-detail-modal');
+      if (cardModal && !cardModal.classList.contains('hidden')) closeCardDetail();
+    }
+  });
   document.getElementById('modal-confirm-btn').addEventListener('click', async () => {
     if (!pendingDelete) return;
     closeModal();
@@ -749,7 +755,6 @@ document.addEventListener('DOMContentLoaded', () => {
     else if (type === 'card') await deleteCard(id);
     pendingDelete = null;
   });
-
   document.getElementById('confirm-modal').addEventListener('click', (e) => {
     if (e.target === document.getElementById('confirm-modal')) closeModal();
   });
